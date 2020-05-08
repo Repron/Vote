@@ -1,6 +1,6 @@
 name: Vote
 version: ${project.version}
-main: org.github.repron.vote.vote.Vote
+main: Vote
 api-version: 1.13
 commands:
   vote:

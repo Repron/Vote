@@ -1,12 +1,9 @@
-package org.github.repron.vote.vote.commands;
+package org.github.repron.vote.commands;
 
-import org.bukkit.entity.Player;
-import org.github.repron.vote.vote.Vote;
+import org.github.repron.vote.Vote;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
-import java.rmi.activation.ActivationGroup_Stub;
 
 public class CommandVote implements CommandExecutor {
 

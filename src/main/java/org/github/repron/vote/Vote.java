@@ -1,8 +1,8 @@
-package org.github.repron.vote.vote;
+package org.github.repron.vote;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.github.repron.vote.vote.commands.CommandVote;
-import org.github.repron.vote.vote.logic.LogicVote;
+import org.github.repron.vote.commands.CommandVote;
+import org.github.repron.vote.logic.LogicVote;
 
 import java.util.Objects;
 

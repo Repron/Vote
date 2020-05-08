@@ -1,7 +1,7 @@
-package org.github.repron.vote.vote.logic;
+package org.github.repron.vote.logic;
 
 import org.bukkit.command.CommandSender;
-import org.github.repron.vote.vote.Vote;
+import org.github.repron.vote.Vote;
 
 import java.util.HashSet;
 
