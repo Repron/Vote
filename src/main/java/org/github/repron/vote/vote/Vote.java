@@ -4,6 +4,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.github.repron.vote.vote.commands.CommandVote;
 import org.github.repron.vote.vote.logic.LogicVote;
 
+import java.util.Objects;
+
 public final class Vote extends JavaPlugin {
 
     private LogicVote logicVote;
@@ -13,7 +15,7 @@ public final class Vote extends JavaPlugin {
         System.out.println("si pipikus");
 
         logicVote = new LogicVote(this);
-        this.getCommand("vote").setExecutor(new CommandVote(this));
+        Objects.requireNonNull(this.getCommand("vote")).setExecutor(new CommandVote(this));
 
     }
 
