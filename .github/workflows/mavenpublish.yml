@@ -21,3 +21,8 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
+    uses: actions/upload-artifact@v2
+      with:
+        name: Vote
+        path: target/Vote-1.0.jar
