@@ -12,7 +12,7 @@ public final class Vote extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        System.out.println("si pipikus");
+        System.out.println("it works");
 
         logicVote = new LogicVote(this);
         Objects.requireNonNull(this.getCommand("vote")).setExecutor(new CommandVote(this));

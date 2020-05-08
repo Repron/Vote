@@ -40,7 +40,7 @@ public class LogicVote implements Runnable {
 
                 } else {
                     System.out.println("Vote already");
-                    player.sendMessage("ju alredi voutid");
+                    player.sendMessage("ju alreadi voted");
                     return true;
                 }
             } else {
@@ -58,7 +58,7 @@ public class LogicVote implements Runnable {
                 plugin.getServer().getScheduler().runTaskLater(plugin, this, 600);
                 return true;
             } else {
-                player.sendMessage("vote alreadyi n progreess");
+                player.sendMessage("vote already in progreess");
                 return true;
             }
         }
@@ -69,14 +69,12 @@ public class LogicVote implements Runnable {
     @Override
     public void run() {
         isVote = false;
-        plugin.getServer().broadcastMessage(String.valueOf(forVotes));
-        plugin.getServer().broadcastMessage(String.valueOf(allVotes/2));
-        plugin.getServer().broadcastMessage("" + 100 * forVotes / allVotes + "%");
+
         if (allVotes <= forVotes * 2) {
             plugin.getServer().getWorlds().get(0).setTime(1600);
             plugin.getServer().broadcastMessage("vote sucess");
         } else {
-            plugin.getServer().broadcastMessage("vote fejld");
+            plugin.getServer().broadcastMessage("vote failed");
         }
         forVotes = 0;
         allVotes = 0;

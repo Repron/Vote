@@ -18,7 +18,7 @@ public class CommandVote implements CommandExecutor {
         if(args.length == 1) {
             plugin.getLogicVote().sendCommand(sender,args[0]);
         } else {
-            sender.sendMessage("Nepičuj tak veľa ty kokot!!!!!!!!!!");
+            sender.sendMessage("nespravny pocet argumentov");
         }
         return false;
 
