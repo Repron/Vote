@@ -1,8 +1,9 @@
-package org.github.repron.vote.logic;
+package com.github.repron.vote.logic;
 
+import com.github.repron.vote.Vote;
 import org.bukkit.command.CommandSender;
-import org.github.repron.vote.Vote;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class LogicVote implements Runnable {
@@ -13,8 +14,14 @@ public class LogicVote implements Runnable {
     private int allVotes;
     private int forVotes;
     private Vote plugin;
+    private HashSet<String> yes;
+    private HashSet<String> no;
+    private HashSet<String> topics;
 
     public LogicVote(Vote plugin) {
+        yes = new HashSet<>(Arrays.asList("ano", "yes", "y"));
+        no = new HashSet<>(Arrays.asList("nie", "no", "n"));
+        topics = new HashSet<>(Arrays.asList("day"));
         isVote = false;
         this.plugin = plugin;
         voted = new HashSet<>();
@@ -23,46 +30,44 @@ public class LogicVote implements Runnable {
     }
 
     public boolean sendCommand(CommandSender player, String arg) {
-        if (arg.equals("ano") || arg.equals("nie")) {
-            System.out.println("Ano/nie");
+        if (yes.contains(arg) || no.contains(arg)) {
             if (isVote) {
                 if (voted.add(player)) {
                     allVotes++;
-                    if (arg.equals("ano")) {
+                    if (yes.contains(arg)) {
                         forVotes++;
-                        player.sendMessage("you voted yes");
-                        System.out.println("Ano");
+                        player.sendMessage("Volil si pre " + topic);
                         return true;
                     } else {
-                        player.sendMessage("you voted no");
+                        player.sendMessage("Volil si proti " + topic);
                         return true;
                     }
 
                 } else {
-                    System.out.println("Vote already");
-                    player.sendMessage("ju alreadi voted");
+                    player.sendMessage("Už raz si hlasoval");
                     return true;
                 }
             } else {
-                player.sendMessage("yes vote in progress");
+                player.sendMessage("Neprebieha žiadne hlasovanie.");
                 return true;
             }
         }
-        if (arg.equals("day")) {
+        if (topics.contains(arg)) {
             if (!isVote) {
+                topic = arg;
                 isVote = true;
                 voted.add(player);
                 allVotes++;
                 forVotes++;
-                plugin.getServer().broadcastMessage(player.getName() + " started a vote for day");
+                plugin.getServer().broadcastMessage(player.getName() + " začal hlasovanie za: " + topic);
                 plugin.getServer().getScheduler().runTaskLater(plugin, this, 600);
                 return true;
             } else {
-                player.sendMessage("vote already in progreess");
+                player.sendMessage("Práve prebieha iné hlasovanie.");
                 return true;
             }
         }
-        player.sendMessage("invalid argument");
+        player.sendMessage("Nesprávny argument");
         return true;
     }
 
@@ -71,14 +76,21 @@ public class LogicVote implements Runnable {
         isVote = false;
 
         if (allVotes <= forVotes * 2) {
-            plugin.getServer().getWorlds().get(0).setTime(1600);
-            plugin.getServer().broadcastMessage("vote sucess");
+            plugin.getServer().broadcastMessage("Hlasovanie za: " + topic + " úspešné");
+            executeVote();
         } else {
-            plugin.getServer().broadcastMessage("vote failed");
+            plugin.getServer().broadcastMessage("Hlasovanie za :" + topic + " neúspešné");
         }
         forVotes = 0;
         allVotes = 0;
         voted = new HashSet<>();
+    }
+
+    private void executeVote() {
+        switch (topic) {
+            case "day":
+                plugin.getServer().getWorlds().get(0).setTime(1600);
+        }
     }
 }
 
