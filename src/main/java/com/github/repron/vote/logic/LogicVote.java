@@ -44,7 +44,7 @@ public class LogicVote implements Runnable {
                     }
 
                 } else {
-                    player.sendMessage("Už raz si hlasoval");
+                    player.sendMessage("Už si raz hlasoval");
                     return true;
                 }
             } else {
