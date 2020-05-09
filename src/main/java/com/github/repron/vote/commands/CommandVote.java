@@ -4,8 +4,11 @@ import com.github.repron.vote.Vote;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 
-public class CommandVote implements CommandExecutor {
+import java.util.List;
+
+public class CommandVote implements CommandExecutor , TabCompleter {
 
     private Vote plugin;
 
@@ -22,5 +25,10 @@ public class CommandVote implements CommandExecutor {
         }
         return false;
 
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        return plugin.getLogicVote().getTopics();
     }
 }
