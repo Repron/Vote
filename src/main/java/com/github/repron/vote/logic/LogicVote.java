@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class LogicVote implements Runnable {
 
@@ -16,12 +17,12 @@ public class LogicVote implements Runnable {
     private Vote plugin;
     private HashSet<String> yes;
     private HashSet<String> no;
-    private HashSet<String> topics;
+    private List<String> topics;
 
     public LogicVote(Vote plugin) {
         yes = new HashSet<>(Arrays.asList("ano", "yes", "y"));
         no = new HashSet<>(Arrays.asList("nie", "no", "n"));
-        topics = new HashSet<>(Arrays.asList("day"));
+        topics = Arrays.asList("day");
         isVote = false;
         this.plugin = plugin;
         voted = new HashSet<>();
@@ -93,7 +94,7 @@ public class LogicVote implements Runnable {
         }
     }
 
-    public HashSet<String> getTopics(){
+    public List<String> getTopics(){
         return topics;
     }
 }
