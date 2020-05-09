@@ -92,5 +92,9 @@ public class LogicVote implements Runnable {
                 plugin.getServer().getWorlds().get(0).setTime(1600);
         }
     }
+
+    public HashSet<String> getTopics(){
+        return topics;
+    }
 }
 
