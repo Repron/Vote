@@ -25,6 +25,7 @@ public class LogicVote implements Runnable {
         yes = new HashSet<>(Arrays.asList("ano", "yes", "y"));
         no = new HashSet<>(Arrays.asList("nie", "no", "n"));
         topics = new HashSet<>(Arrays.asList("day", "night"));
+
         isVote = false;
         this.plugin = plugin;
         voted = new HashSet<>();
@@ -39,10 +40,10 @@ public class LogicVote implements Runnable {
                     allVotes++;
                     if (yes.contains(arg)) {
                         forVotes++;
-                        player.sendMessage("Volil si pre " + topic);
+                        player.sendMessage("Volil si pre " + ChatColor.AQUA + topic);
                         return true;
                     } else {
-                        player.sendMessage("Volil si proti " + topic);
+                        player.sendMessage("Volil si proti " + ChatColor.AQUA + topic);
                         return true;
                     }
 
@@ -62,7 +63,7 @@ public class LogicVote implements Runnable {
                 voted.add(player);
                 allVotes++;
                 forVotes++;
-                plugin.getServer().broadcastMessage(player.getName() + " začal hlasovanie za: " + topic + ". Hlasujte s " + ChatColor.YELLOW + "/vote");
+                plugin.getServer().broadcastMessage(ChatColor.YELLOW + player.getName() + ChatColor.RESET + " začal hlasovanie za: " + ChatColor.AQUA + topic + ChatColor.RESET + ". Hlasujte s " + ChatColor.YELLOW + "/vote");
                 plugin.getServer().getScheduler().runTaskLater(plugin, this, 600);
                 return true;
             } else {
@@ -78,11 +79,11 @@ public class LogicVote implements Runnable {
     public void run() {
         isVote = false;
 
-        if (allVotes <= forVotes * 2) {
-            plugin.getServer().broadcastMessage("Hlasovanie za: " + topic + " úspešné");
+        if (allVotes < forVotes * 2) {
+            plugin.getServer().broadcastMessage("Hlasovanie za " + ChatColor.AQUA + topic + ChatColor.RESET + " " + 100 * forVotes / allVotes + "%, úspešné");
             executeVote();
         } else {
-            plugin.getServer().broadcastMessage("Hlasovanie za :" + topic + " neúspešné");
+            plugin.getServer().broadcastMessage("Hlasovanie za " + ChatColor.AQUA + topic + ChatColor.RESET + " " + 100 * forVotes / allVotes + "%, neúspešné");
         }
         forVotes = 0;
         allVotes = 0;
@@ -90,7 +91,6 @@ public class LogicVote implements Runnable {
     }
 
     private void executeVote() {
-        System.out.println("Topic: " + topic);
         switch (topic) {
             case "day":
                 plugin.getServer().getWorlds().get(0).setTime(1000);
