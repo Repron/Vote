@@ -1,6 +1,7 @@
 package com.github.repron.vote.logic;
 
 import com.github.repron.vote.Vote;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class LogicVote implements Runnable {
                 voted.add(player);
                 allVotes++;
                 forVotes++;
-                plugin.getServer().broadcastMessage(player.getName() + " začal hlasovanie za: " + topic + " hlasujte s /vote");
+                plugin.getServer().broadcastMessage(player.getName() + " začal hlasovanie za: " + topic + ". Hlasujte s " + ChatColor.YELLOW + "/vote");
                 plugin.getServer().getScheduler().runTaskLater(plugin, this, 600);
                 return true;
             } else {
@@ -89,17 +90,20 @@ public class LogicVote implements Runnable {
     }
 
     private void executeVote() {
+        System.out.println("Topic: " + topic);
         switch (topic) {
             case "day":
                 plugin.getServer().getWorlds().get(0).setTime(1000);
+                break;
             case "night":
                 plugin.getServer().getWorlds().get(0).setTime(13000);
+                break;
         }
     }
 
     public List<String> getTabComplete() {
         if (isVote) {
-            return Arrays.asList("yes", "ano", "no", "nie");
+            return Arrays.asList("yes", "no");
         } else {
             return new ArrayList<>(topics);
         }
