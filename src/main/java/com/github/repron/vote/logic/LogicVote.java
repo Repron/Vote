@@ -3,6 +3,7 @@ package com.github.repron.vote.logic;
 import com.github.repron.vote.Vote;
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -17,12 +18,12 @@ public class LogicVote implements Runnable {
     private Vote plugin;
     private HashSet<String> yes;
     private HashSet<String> no;
-    private List<String> topics;
+    private HashSet<String> topics;
 
     public LogicVote(Vote plugin) {
         yes = new HashSet<>(Arrays.asList("ano", "yes", "y"));
         no = new HashSet<>(Arrays.asList("nie", "no", "n"));
-        topics = Arrays.asList("day", "night");
+        topics = new HashSet<>(Arrays.asList("day", "night"));
         isVote = false;
         this.plugin = plugin;
         voted = new HashSet<>();
@@ -96,8 +97,12 @@ public class LogicVote implements Runnable {
         }
     }
 
-    public List<String> getTopics() {
-        return topics;
+    public List<String> getTabComplete() {
+        if (isVote) {
+            return Arrays.asList("yes", "ano", "no", "nie");
+        } else {
+            return new ArrayList<>(topics);
+        }
     }
 }
 

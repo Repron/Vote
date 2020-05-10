@@ -29,6 +29,6 @@ public class CommandVote implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-        return plugin.getLogicVote().getTopics();
+        return plugin.getLogicVote().getTabComplete();
     }
 }
