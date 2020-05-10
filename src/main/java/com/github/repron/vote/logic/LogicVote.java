@@ -22,7 +22,7 @@ public class LogicVote implements Runnable {
     public LogicVote(Vote plugin) {
         yes = new HashSet<>(Arrays.asList("ano", "yes", "y"));
         no = new HashSet<>(Arrays.asList("nie", "no", "n"));
-        topics = Arrays.asList("day","night");
+        topics = Arrays.asList("day", "night");
         isVote = false;
         this.plugin = plugin;
         voted = new HashSet<>();
@@ -90,13 +90,13 @@ public class LogicVote implements Runnable {
     private void executeVote() {
         switch (topic) {
             case "day":
-                plugin.getServer().getWorlds().get(0).setTime(1600);
+                plugin.getServer().getWorlds().get(0).setTime(1000);
             case "night":
-                plugin.getServer().getWorlds().get(0).setTime(12000);
+                plugin.getServer().getWorlds().get(0).setTime(13000);
         }
     }
 
-    public List<String> getTopics(){
+    public List<String> getTopics() {
         return topics;
     }
 }
