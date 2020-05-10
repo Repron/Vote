@@ -60,7 +60,7 @@ public class LogicVote implements Runnable {
                 voted.add(player);
                 allVotes++;
                 forVotes++;
-                plugin.getServer().broadcastMessage(player.getName() + " začal hlasovanie za: " + topic);
+                plugin.getServer().broadcastMessage(player.getName() + " začal hlasovanie za: " + topic + " hlasujte s /vote");
                 plugin.getServer().getScheduler().runTaskLater(plugin, this, 600);
                 return true;
             } else {
