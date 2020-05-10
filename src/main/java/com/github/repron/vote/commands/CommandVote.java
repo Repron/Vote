@@ -8,7 +8,7 @@ import org.bukkit.command.TabCompleter;
 
 import java.util.List;
 
-public class CommandVote implements CommandExecutor , TabCompleter {
+public class CommandVote implements CommandExecutor, TabCompleter {
 
     private Vote plugin;
 
