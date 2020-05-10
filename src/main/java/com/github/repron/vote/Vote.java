@@ -12,12 +12,11 @@ public final class Vote extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        CommandVote commandVote = new CommandVote(this);
-        System.out.println("Vote plugin loaded");
         logicVote = new LogicVote(this);
-        Objects.requireNonNull(this.getCommand("vote")).setExecutor(commandVote);
-        Objects.requireNonNull(this.getCommand("vote")).setTabCompleter(commandVote);
 
+        CommandVote commandVote = new CommandVote(this);
+
+        System.out.println("Vote plugin loaded");
     }
 
     @Override

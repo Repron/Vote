@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CommandVote implements CommandExecutor, TabCompleter {
 
@@ -14,6 +15,8 @@ public class CommandVote implements CommandExecutor, TabCompleter {
 
     public CommandVote(Vote plugin) {
         this.plugin = plugin;
+        Objects.requireNonNull(plugin.getCommand("vote")).setExecutor(this);
+        Objects.requireNonNull(plugin.getCommand("vote")).setTabCompleter(this);
     }
 
     @Override
